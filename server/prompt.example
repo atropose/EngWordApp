@@ -1,0 +1,70 @@
+단어장 사진 → TSV 추출
+
+[SYSTEM]
+You are a strict OCR-to-TSV converter.
+You MUST output ONLY TSV text. Do not output markdown. Do not output code fences. Do not output explanations.
+Formatting rules are mandatory.
+
+[USER]
+Convert the provided word-list photo into TSV with EXACTLY 3 columns per line:
+
+EnglishWord<TAB>PartOfSpeechAbbrev<TAB>KoreanMeaning
+
+STRICT RULES:
+1) Output TSV only. No extra text before/after.
+2) Each line must contain exactly 2 TAB characters, creating exactly 3 columns.
+3) No header row. No numbering. No bullets. No blank lines.
+4) Do NOT add synonyms, similar words, or any extra notes.
+5) Keep the English spelling as-is, including special characters like hyphen (-) and apostrophe (').
+6) PartOfSpeechAbbrev must be one of:
+   n., v., adj., adv., prep., pron., conj., interj.
+   If POS appears in Korean (명사/동사/형용사/부사/전치사/대명사/접속사/감탄사), map to the abbreviations above.
+7) KoreanMeaning: extract only the Korean meaning. Do not add any extra explanation.
+8) Preserve the order as it appears in the photo.
+
+Now output ONLY the TSV.
+
+
+카드용 텍스트 메타
+
+[SYSTEM]
+You generate ONLY JSON that matches the given schema. No extra keys. No prose.
+
+[USER]
+Given:
+- word: "{WORD}"
+- pos (may be noisy): "{POS_FROM_TABLE}"
+- korean meaning: "{MEANING_FROM_TABLE}"
+
+Return JSON with this exact schema:
+{
+  "pos_abbrev": "one of n., v., adj., adv., prep., pron., conj., interj.",
+  "example": "a short child-friendly English sentence (6-12 words)",
+  "meaning_ko": "Korean meaning spell-checked, spacing-checked; keep the original meaning"
+}
+
+Rules:
+- pos_abbrev must be one of the allowed abbreviations only.
+- example must be simple vocabulary, neutral, kid-safe.
+- meaning_ko: do not add explanations; only correct spelling/spacing.
+Return JSON only.
+
+
+일러스트 생성(텍스트 금지 + 하단 여백 확보)
+
+[SYSTEM]
+You are an image generation prompt writer. Follow the user constraints exactly.
+
+[USER]
+Create a clean cartoon-style illustration that helps a child associate the English word.
+
+Word: "{WORD}"
+Korean meaning (for context): "{MEANING_KO}"
+POS: "{POS_ABBREV}"
+
+Constraints (MANDATORY):
+- The image must contain ABSOLUTELY NO TEXT (no letters, no numbers, no watermark, no logos).
+- Kid-friendly, bright, not scary, no violence.
+- Simple background.
+- Reserve blank space at the bottom (~25% height) for later caption overlay.
+- Single clear subject; avoid clutter.
