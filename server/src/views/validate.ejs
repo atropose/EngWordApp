@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Validate</title><link rel="stylesheet" href="/main.css"></head><body><div class="container">
+<h1>Validate <%= weekId %></h1>
+<table id="rows"><thead><tr><th>Word</th><th>POS</th><th>Meaning</th><th></th></tr></thead><tbody>
+<% rows.forEach(r=> { %><tr>
+<td contenteditable="true"><%= r.word %></td>
+<td contenteditable="true"><%= r.pos %></td>
+<td contenteditable="true"><%= r.meaning %></td>
+<td><button class="remove">x</button></td>
+</tr><% }) %>
+</tbody></table>
+<button id="add" class="btn">Add Row</button>
+<button id="normalize" class="btn">Normalize POS</button>
+<button id="save" class="btn">Save</button>
+<a href="/weeks/<%= weekId %>">Back</a>
+<script>window.__WEEK_ID__='<%= weekId %>';</script>
+<script src="/validate.js"></script>
+</div></body></html>

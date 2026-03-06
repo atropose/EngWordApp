@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Weeks</title><link rel="stylesheet" href="/main.css"></head><body><div class="container">
+<h1>Weeks</h1>
+<a class="btn" href="/weeks/new">Create Week</a>
+<ul>
+  <% weeks.forEach(w => { %>
+    <li><a href="/weeks/<%= w.id %>"><%= w.id %></a> <% if (w.hasZip) { %><span>✅ zip</span><% } %></li>
+  <% }) %>
+</ul>
+</div></body></html>

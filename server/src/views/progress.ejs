@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Create Week</title><link rel="stylesheet" href="/main.css"></head><body><div class="container">
+<h1>Create Week</h1>
+<form method="post" action="/weeks/new">
+  <label>Date <input type="date" name="date" value="<%= new Date().toISOString().slice(0,10) %>"></label>
+  <button class="btn" type="submit">Create</button>
+</form>
+<a href="/weeks">Back</a>
+</div></body></html>
